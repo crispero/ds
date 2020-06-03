@@ -22,17 +22,7 @@ namespace joblogger
             
             string eventBusName = Environment.GetEnvironmentVariable("NATS_EVENT_BUS");
 
-            var events = nats.Observe(eventBusName)
-                .Where(m => m.Data?.Any() == true)
-                .Select(m => Encoding.Default.GetString(m.Data));
-
-            events.Subscribe(id => 
-            {
-                IDatabase db = redis.GetDatabase();
-                string message = db.StringGet(id);
-                Console.WriteLine("id: " + id + ", " + "message: " + message);
-            });
-
+            Program.SubscribeOnEvents(redis, nats);
             Console.WriteLine("Starting listen events:");
 
             Console.CancelKeyPress += delegate (object sender, ConsoleCancelEventArgs e)
