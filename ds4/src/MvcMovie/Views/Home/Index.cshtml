@@ -1,0 +1,15 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+}
+
+<div class="text-center">
+    <form method="POST">
+        <div>
+            <input type="text" name="description" placeholder="описание"/>
+        </div>
+        <div>
+            <input type="text" name="data" placeholder="текст на проверку"/>
+        </div>
+        <button type="submit" asp-action="GetTask"> get task </button>
+    </form>
+</div>
